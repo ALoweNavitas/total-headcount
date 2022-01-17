@@ -39,7 +39,7 @@ df = df[[
 
 # Export to Excel
 password = input('Enter the Excel file password: ')
-workbook = xw.Book(output_file[0], password='password')
+workbook = xw.Book(output_file[0], password=password)
 ws = workbook.sheets['head count']
 ws.range('A4').options(index=False, header=False).value = df
 
