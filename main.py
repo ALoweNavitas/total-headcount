@@ -39,8 +39,10 @@ df = df[[
     "Contract - Contract Type"
 ]]
 
+password = input('Enter the document password: ')
+
 # Export to Excel
-workbook = xw.Book(output_file[0], password='password')
+workbook = xw.Book(output_file[0], password=password)
 ws = workbook.sheets['head count']
 ws.range('A4').options(index=False, header=False).value = df
 
