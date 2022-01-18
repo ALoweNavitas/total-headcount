@@ -1,2 +1,8 @@
-# Read me for Total Headcount
+# Readme
+
+## What this script does
+
+## Installing requirements
+## Configure .bat script
+
 
