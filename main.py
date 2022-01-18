@@ -1,8 +1,10 @@
 import pandas as pd
 import xlwings as xw
 import os
+import time
 
 dir = os.getcwd()
+os.chdir(dir)
 
 import_file = []
 output_file = []
@@ -11,7 +13,7 @@ output_file = []
 for file in os.listdir(os.path.join(dir, 'export')):
     if file.endswith('.xlsx'):
         fp = os.path.basename(file)
-        import_file.append(os.path.join(dir, "export", fp).replace("\\", "/"))
+        import_file.append(os.path.join(dir, 'export', fp).replace("\\", "/"))
 
 # Locate the output file
 for file in os.listdir(os.path.join(dir, 'output')):
@@ -38,8 +40,19 @@ df = df[[
 ]]
 
 # Export to Excel
-password = input('Enter the Excel file password: ')
-workbook = xw.Book(output_file[0], password=password)
+workbook = xw.Book(output_file[0], password='password')
 ws = workbook.sheets['head count']
 ws.range('A4').options(index=False, header=False).value = df
 
+# time.sleep(5)
+workbook.save()
+
+def countdown(time_sec):
+    while time_sec:
+        mins, sec = divmod(time_sec, 60)
+        timeformat = '{:02d}:{:02d}'.format(mins, sec)
+        print(timeformat, end='\r')
+        time.sleep(1)
+        time_sec -= 1
+
+countdown(5)
